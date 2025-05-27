@@ -12,25 +12,36 @@
     "vscode": "^1.93.1"
   },
   "main": "./out/extension.js",
-  "activationEvents": [
-    "*"
-  ],
+  "activationEvents": [],
   "contributes": {
     "views": {
-      "sample-id": [
+      "explorer": [
         {
           "type": "webview",
-          "id": "sample-id",
-          "name": "sample-name"
+          "id": "errorDemoView",
+          "name": "Error Demo",
+          "when": "true"
         }
       ]
     },
-    "viewsContainers": {
-      "activitybar": [
+    "commands": [
+      {
+        "command": "extension.showErrorsAndOpenTerminal",
+        "title": "エラー表示とターミナル起動",
+        "category": "Error Demo"
+      },
+      {
+        "command": "errorDemo.refresh",
+        "title": "更新",
+        "icon": "$(refresh)"
+      }
+    ],
+    "menus": {
+      "view/title": [
         {
-          "id": "sample-id",
-          "title": "sample-title",
-          "icon": "./resources/webview_icon.svg"
+          "command": "errorDemo.refresh",
+          "when": "view == errorDemoView",
+          "group": "navigation"
         }
       ]
     }

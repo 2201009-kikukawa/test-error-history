@@ -2,16 +2,15 @@ import { ExtensionContext, window, commands, languages, DiagnosticSeverity } fro
 import { ErrorDemoViewProvider } from "./providers/ErrorDemoViewProvider";
 
 export function activate(context: ExtensionContext) {
-  // 出力チャンネルを作成
-  const outputChannel = window.createOutputChannel("Error Demo");
-  const errorProvider = new ErrorDemoViewProvider(context.extensionUri);
+  const outputChannel = window.createOutputChannel("Error Demo");  // 出力チャンネルを作成
+  const errorProvider = new ErrorDemoViewProvider(context.extensionUri);// ErrorDemoViewProviderのインスタンスを作成  
 
   const webviewViewDisposable = window.registerWebviewViewProvider(
     ErrorDemoViewProvider.viewType,
     errorProvider
   );
 
-  // エラー表示コマンド
+  // エラー表示コマンド（ここもProviderに分けたい）
   const showErrorsCommand = commands.registerCommand(
     "extension.showErrorsAndOpenTerminal",
     async () => {
@@ -43,6 +42,7 @@ export function activate(context: ExtensionContext) {
         outputChannel.appendLine(`診断数: ${diagnostics.length}件`);
         outputChannel.appendLine("=".repeat(50));
 
+        //ハードコーディングになってるのやめたい
         diagnostics.forEach((diagnostic, index) => {
           let severityString: string;
           let severityIcon: string;

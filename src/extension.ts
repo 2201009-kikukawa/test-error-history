@@ -2,8 +2,8 @@ import { ExtensionContext, window, commands, languages, DiagnosticSeverity } fro
 import { ErrorDemoViewProvider } from "./providers/ErrorDemoViewProvider";
 
 export function activate(context: ExtensionContext) {
-  const outputChannel = window.createOutputChannel("Error Demo");  // 出力チャンネルを作成
-  const errorProvider = new ErrorDemoViewProvider(context.extensionUri);// ErrorDemoViewProviderのインスタンスを作成  
+  const outputChannel = window.createOutputChannel("Error Demo"); // 出力チャンネルを作成
+  const errorProvider = new ErrorDemoViewProvider(context.extensionUri); // ErrorDemoViewProviderのインスタンスを作成
 
   const webviewViewDisposable = window.registerWebviewViewProvider(
     ErrorDemoViewProvider.viewType,
@@ -26,7 +26,7 @@ export function activate(context: ExtensionContext) {
         return;
       }
 
-      const diagnostics = languages.getDiagnostics(editor.document.uri);
+      const diagnostics = languages.getDiagnostics(editor.document.uri); // 現在のドキュメントの診断情報を取得
 
       // 出力チャンネルをクリアして表示
       outputChannel.clear();
